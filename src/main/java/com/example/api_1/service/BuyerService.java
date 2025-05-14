@@ -1,7 +1,6 @@
 package com.example.api_1.service;
 
 import com.example.api_1.pojo.BuyerBody;
-import com.example.api_1.repo.BuyerRepository;
 import com.example.api_1.repo.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

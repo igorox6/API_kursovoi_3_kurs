@@ -1,14 +1,11 @@
-package com.example.api_1.repo;
+package com.example.api_1.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
-
-@Repository
+@Service
 public class BuyerRepository {
 
     private final JdbcTemplate jdbcTemplate;

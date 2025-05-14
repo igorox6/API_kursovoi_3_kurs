@@ -37,7 +37,7 @@ public class ReceiptController {
     @GetMapping("/{id}/{date}")
     public ResponseEntity<Map<String, Object>> getReceiptByIdAndDate(
             @PathVariable Long id,
-            @PathVariable String date  // Приходит как строка типа "2024-05-09"
+            @PathVariable String date
     ) {
         Map<String, Object> result = receiptService.getReceiptByIdAndDate(id, date);
         Integer status = result.containsKey("status") ? ((Number) result.get("status")).intValue() : 200;

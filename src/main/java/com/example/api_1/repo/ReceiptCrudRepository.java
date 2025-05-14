@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface ReceiptCrudRepository extends CrudRepository<Receipt, Long> {
-    List<Receipt> findByIdBuyer(Long idBuyer);
+    List<Receipt> findByBuyerId(Long idBuyer);
 }

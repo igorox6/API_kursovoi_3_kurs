@@ -21,7 +21,7 @@ public class Receipt {
     private Double totalSum;
 
     @Column(name = "date_receipt")
-    private Date DateReceipt;
+    private Date dateReceipt;
 
     private Boolean paid;
 
@@ -30,16 +30,12 @@ public class Receipt {
     @JsonIgnore
     private Worker salesman;
 
-    @Column(name = "id_salesman")
-    private Integer idSalesman;
 
     @ManyToOne
     @JoinColumn(name = "id_buyer", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore
     private Buyer buyer;
 
-    @Column(name = "id_buyer")
-    private Integer idBuyer;
 
     @ManyToMany
     @JoinTable(
@@ -54,7 +50,7 @@ public class Receipt {
     }
 
     public Object getDateReceipt() {
-        return DateReceipt;
+        return dateReceipt;
     }
 
     public Object getTotalSum() {

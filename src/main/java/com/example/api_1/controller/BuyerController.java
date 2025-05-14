@@ -1,11 +1,11 @@
 package com.example.api_1.controller;
 
 import com.example.api_1.pojo.BuyerDTO;
-import com.example.api_1.service.BuyerService; // Заменили AuthService на BuyerService
+import com.example.api_1.service.BuyerService;
 import com.example.api_1.entity.Buyer;
 import com.example.api_1.pojo.BuyerBody;
 import com.example.api_1.repo.BuyerCrudRepository;
-import com.example.api_1.repo.BuyerRepository;
+import com.example.api_1.service.BuyerRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,20 +17,18 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/buyers")
 public class BuyerController {
-    private final BuyerService buyerService; // Изменили на BuyerService
-    private final BuyerRepository buyerRepository;
+    private final BuyerService buyerService;
     private final BuyerCrudRepository buyerCrudRepository;
 
     public BuyerController(BuyerService buyerService, BuyerRepository buyerRepository, BuyerCrudRepository buyerCrudRepository) {
-        this.buyerService = buyerService; // Изменили на buyerService
-        this.buyerRepository = buyerRepository;
+        this.buyerService = buyerService;
         this.buyerCrudRepository = buyerCrudRepository;
     }
 
     @PostMapping("/add")
     public ResponseEntity<Map<String, Object>> addBuyer(@RequestBody BuyerBody request) {
         try {
-            Map<String, Object> response = buyerService.register(request); // Используем buyerService
+            Map<String, Object> response = buyerService.register(request);
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
             Map<String, Object> errorResponse = new HashMap<>();

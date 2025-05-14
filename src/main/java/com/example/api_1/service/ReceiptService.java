@@ -2,7 +2,6 @@ package com.example.api_1.service;
 
 import com.example.api_1.entity.Receipt;
 import com.example.api_1.pojo.ReceiptBody;
-import com.example.api_1.repo.ReceiptRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -115,7 +114,6 @@ public class ReceiptService {
         logger.info("Updating receipt with ID: {}", id);
 
         try {
-            // Проверяем наличие original_date_receipt
             if (body.get("original_date_receipt") == null) {
                 logger.error("Missing original_date_receipt for update");
                 Map<String, Object> response = new HashMap<>();
@@ -124,20 +122,16 @@ public class ReceiptService {
                 return response;
             }
 
-            // Парсим дату из запроса
             Date originalDate = Date.valueOf(body.get("original_date_receipt").toString());
 
-            // Извлекаем данные из тела запроса
             Integer id_salesman = body.get("id_salesman") != null ? Integer.valueOf(body.get("id_salesman").toString()) : null;
             Integer id_buyer = body.get("id_buyer") != null ? Integer.valueOf(body.get("id_buyer").toString()) : null;
             Boolean paid = body.get("paid") != null ? Boolean.valueOf(body.get("paid").toString()) : false;
 
-            // Новая дата (если не указана — оставляем ту же)
             Date newDate = body.get("new_date_receipt") != null ?
                     Date.valueOf(body.get("new_date_receipt").toString()) :
                     originalDate;
 
-            // Проверяем обязательные поля
             if (id_salesman == null || id_buyer == null) {
                 logger.error("Missing required fields for update: id_salesman or id_buyer");
                 Map<String, Object> response = new HashMap<>();
@@ -146,7 +140,6 @@ public class ReceiptService {
                 return response;
             }
 
-            // Обновляем чек через репозиторий
             Map<String, Object> result = receiptRepository.updateReceipt(
                     id,
                     originalDate, // старая дата по которой ищем
@@ -200,7 +193,6 @@ public class ReceiptService {
 
             Date originalDate = dateReceipt;
 
-            // Новые значения из payload
             Integer id_salesman = payload.get("idSalesman") != null ? Integer.valueOf(payload.get("idSalesman").toString()) : null;
             Boolean paid = payload.get("paid") != null ? Boolean.valueOf(payload.get("paid").toString()) : false;
             Date newDate = payload.get("dateReceipt") != null ? Date.valueOf(payload.get("dateReceipt").toString()) : null;

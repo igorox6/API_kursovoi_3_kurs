@@ -17,7 +17,7 @@ public class Worker {
     private String name;
     private String lastname;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_user", referencedColumnName = "id")
     private User user;
 }

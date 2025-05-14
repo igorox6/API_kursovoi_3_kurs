@@ -1,11 +1,10 @@
 package com.example.api_1.controller;
 
 import com.example.api_1.entity.Company;
+import com.example.api_1.pojo.CompanyBody;
 import com.example.api_1.repo.CompanyRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/companies")
@@ -21,4 +20,15 @@ public class CompanyController {
     public ResponseEntity<Iterable<Company>> getCompanies() {
         return ResponseEntity.ok(companyRepository.findAll());
     }
+
+    @PostMapping
+    public ResponseEntity<Company> createCompany(@RequestBody CompanyBody request) {
+        Company company = new Company();
+        company.setName(request.getName());
+        company.setIdCountry(request.getIdCountry());
+
+        Company savedCompany = companyRepository.save(company);
+        return ResponseEntity.status(201).body(savedCompany);
+    }
+
 }

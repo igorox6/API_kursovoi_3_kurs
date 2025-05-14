@@ -41,7 +41,6 @@ public class Product {
     @Transient
     private JsonNode propertiesNode;
 
-    // Добавляем отношение ManyToMany с Category
     @ManyToMany
     @JoinTable(
             name = "category_product",
